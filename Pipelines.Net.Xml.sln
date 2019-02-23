@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.271
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pipelines.Xml", "Pipelines.Xml\Pipelines.Xml.csproj", "{DCAE5A29-3A2A-4E24-BC44-2668745A3933}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pipelines.Xml.Tests.Units", "Pipelines.Xml.Tests.Units\Pipelines.Xml.Tests.Units.csproj", "{2BAC89C7-B9C5-483C-B3FB-B713D6FA3649}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DCAE5A29-3A2A-4E24-BC44-2668745A3933}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCAE5A29-3A2A-4E24-BC44-2668745A3933}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCAE5A29-3A2A-4E24-BC44-2668745A3933}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCAE5A29-3A2A-4E24-BC44-2668745A3933}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BAC89C7-B9C5-483C-B3FB-B713D6FA3649}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BAC89C7-B9C5-483C-B3FB-B713D6FA3649}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BAC89C7-B9C5-483C-B3FB-B713D6FA3649}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BAC89C7-B9C5-483C-B3FB-B713D6FA3649}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4A39DD9B-0A34-4592-B4A0-089ABC8B2F5B}
+	EndGlobalSection
+EndGlobal
