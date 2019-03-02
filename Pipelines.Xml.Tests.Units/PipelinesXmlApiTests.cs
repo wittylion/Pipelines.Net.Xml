@@ -42,5 +42,14 @@ namespace Pipelines.Xml.Tests.Units
 
             pipeline.GetProcessors().Should().NotBeEmpty("because the XPath points to a pipeline containing processor");
         }
+        
+        [Fact]
+        public void GetPipelineFromXmlByXPath_WhenPassingNullXPath_ShouldReturnDefaultPipeline()
+        {
+            var xmlPipeline = TestXmlGenerator.GetDocumentWithPipelinesSectionAndEmptyProcessor();
+            var pipeline = PipelinesXmlApi.GetPipelineFromXmlByXPath(xmlPipeline, null, null);
+
+            pipeline.Should().BeNull("because the XPath is null");
+        }
     }
 }

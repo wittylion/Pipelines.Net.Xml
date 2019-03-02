@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
 using System.Xml.XPath;
 using Pipelines.Implementations.Pipelines;
 using Pipelines.Xml.Implementations.GetPipeline;
@@ -31,7 +32,17 @@ namespace Pipelines.Xml
         
         public static IPipeline GetPipelineFromXmlByXPath(XNode xmlNode, string xpathExpression, IPipeline defaultValue)
         {
-            return GetPipelineFromXml(xmlNode?.XPathSelectElement(xpathExpression), defaultValue);
+            XElement xmlElement;
+            try
+            {
+                xmlElement = xmlNode?.XPathSelectElement(xpathExpression);
+            }
+            catch
+            {
+                return defaultValue;
+            }
+
+            return GetPipelineFromXml(xmlElement, defaultValue);
         }
     }
 }
