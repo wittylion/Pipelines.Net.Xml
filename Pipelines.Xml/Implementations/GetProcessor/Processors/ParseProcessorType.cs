@@ -7,7 +7,7 @@ namespace Pipelines.Xml.Implementations.GetProcessor.Processors
     {
         public override Task SafeExecute(GetProcessorContext args)
         {
-            args.ProcessorType = args.XElement.Attribute(XName.Get("type"))?.Value;
+            args.ProcessorType = args.XElement.Attribute(args.ProcessorAttribute)?.Value;
 
             return Done;
         }

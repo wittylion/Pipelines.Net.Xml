@@ -10,6 +10,12 @@ namespace Pipelines.Xml.Implementations.GetProcessor
             set => this.SetOrAddProperty(nameof(XElement), value);
         }
 
+        public string ProcessorAttribute
+        {
+            get => this.GetPropertyValueOrNull<string>(nameof(ProcessorAttribute));
+            set => this.SetOrAddProperty(nameof(ProcessorAttribute), value);
+        }
+
         public string ProcessorType
         {
             get => this.GetPropertyValueOrNull<string>(nameof(ProcessorType));

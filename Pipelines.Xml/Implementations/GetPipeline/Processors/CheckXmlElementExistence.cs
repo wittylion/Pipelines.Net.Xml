@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 
 namespace Pipelines.Xml.Implementations.GetPipeline.Processors
 {
@@ -6,9 +7,17 @@ namespace Pipelines.Xml.Implementations.GetPipeline.Processors
     {
         public override Task SafeExecute(GetPipelineContext args)
         {
-            if (args.XElement == null)
+            var xmlElement = args.XElement;
+            if (xmlElement == null)
             {
                 args.AbortPipelineWithErrorAndNoResult("Xml element is null.");
+                return Done;
+            }
+
+            if (!xmlElement.HasElements || !xmlElement.Elements(args.ProcessorTagName).Any())
+            {
+                args.AbortPipelineWithErrorAndNoResult("Xml element has no children. Can not create empty pipeline.");
+                return Done;
             }
 
             return Done;

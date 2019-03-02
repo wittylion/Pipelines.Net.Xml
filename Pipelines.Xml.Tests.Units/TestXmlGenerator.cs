@@ -6,13 +6,18 @@ namespace Pipelines.Xml.Tests.Units
     {
         public static XElement GetPipelineXmlWithSingleEmptyProcessor()
         {
-            var xmlPipeline = new XElement("testPipeline");
-            var xmlProcessor = new XElement("processor");
-            xmlProcessor.SetAttributeValue(XName.Get("type"), typeof(TestEmptyProcessor).AssemblyQualifiedName);
+            return new XElement("testPipeline",
+                new XElement("processor",
+                    new XAttribute("type", typeof(TestEmptyProcessor).AssemblyQualifiedName)
+                )
+            );
+        }
 
-            xmlPipeline.Add(xmlProcessor);
-
-            return xmlPipeline;
+        public static XDocument GetDocumentWithPipelinesSectionAndEmptyProcessor()
+        {
+            return new XDocument(
+                new XElement("pipelines", GetPipelineXmlWithSingleEmptyProcessor())
+            );
         }
     }
 }

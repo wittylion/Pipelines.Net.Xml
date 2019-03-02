@@ -8,22 +8,28 @@ namespace Pipelines.Xml.Implementations.GetPipeline.Processors
 {
     public class TryGetPipelineFromTheRootElement : GetPipelineFromXmlBaseProcessor
     {
-        public override Task SafeExecute(GetPipelineContext args)
+        public override async Task SafeExecute(GetPipelineContext args)
         {
-            var processorsElements = args.XElement.Elements(XName.Get("processor"));
+            var processorsElements = args.XElement.Elements(args.ProcessorTagName);
             var processorParser = new ProcessorParser();
             var list = new LinkedList<IProcessor>();
 
             foreach (var processorElement in processorsElements)
             {
-                var processor = processorParser.GetProcessor(processorElement);
+                QueryContext<IProcessor> getProcessorContext = new GetProcessorContext
+                {
+                    XElement = processorElement,
+                    ProcessorAttribute = args.TypeAttributeName
+                };
+                var processor = await processorParser.Execute(getProcessorContext);
+
+                if (processor == null) continue;
+                
                 list.AddLast(processor);
             }
 
             var result = PredefinedPipeline.FromProcessors(list);
             args.SetResultWithInformation(result, "Pipeline is created.");
-
-            return Done;
         }
 
         protected override bool CustomSafeCondition(GetPipelineContext args)
