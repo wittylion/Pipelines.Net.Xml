@@ -7,7 +7,10 @@ namespace Pipelines.Xml.Implementations.GetProcessor
     public class ProcessorParser : PipelineExecutor
     {
         public ProcessorParser() : base(
-            PredefinedPipeline.FromProcessors<ParseProcessorType, CreateFromType>())
+            PredefinedPipeline.FromProcessors<
+                ParseProcessorType, 
+                TryToObtainType, 
+                CreateTypeDerivedFromProcessorInterface>())
         {
         }
 

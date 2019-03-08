@@ -22,7 +22,7 @@ namespace Pipelines.Xml.Tests.Units
             var pipeline = PipelinesXmlApi.GetPipelineFromXmlOrEmpty(xmlPipeline);
 
             pipeline.GetProcessors().Should().ContainSingle("test element contains an empty processor")
-                .And.Subject.First().Should().BeOfType<TestEmptyProcessor>("this processor is specified in test data");
+                .And.Subject.First().Should().BeOfType<EmptyTestProcessor>("this processor is specified in test data");
         }
         
         [Fact]

@@ -8,7 +8,7 @@ namespace Pipelines.Xml.Tests.Units
         {
             return new XElement("testPipeline",
                 new XElement("processor",
-                    new XAttribute("type", typeof(TestEmptyProcessor).AssemblyQualifiedName)
+                    new XAttribute("type", typeof(EmptyTestProcessor).AssemblyQualifiedName)
                 )
             );
         }

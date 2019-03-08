@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Xml.Linq;
 
 namespace Pipelines.Xml.Implementations.GetProcessor
 {
@@ -6,21 +7,20 @@ namespace Pipelines.Xml.Implementations.GetProcessor
     {
         public XElement XElement
         {
-            get => this.GetPropertyValueOrNull<XElement>(nameof(XElement));
-            set => this.SetOrAddProperty(nameof(XElement), value);
+            get => this.GetPropertyValueOrNull<XElement>(GetProcessorProperties.XElement);
+            set => this.SetOrAddProperty(GetProcessorProperties.XElement, value);
         }
 
         public string ProcessorAttribute
         {
-            get => this.GetPropertyValueOrNull<string>(nameof(ProcessorAttribute));
-            set => this.SetOrAddProperty(nameof(ProcessorAttribute), value);
+            get => this.GetPropertyValueOrNull<string>(nameof(GetProcessorProperties.ProcessorTypeAttribute));
+            set => this.SetOrAddProperty(nameof(GetProcessorProperties.ProcessorTypeAttribute), value);
         }
 
-        public string ProcessorType
+        public Type ProcessorType
         {
-            get => this.GetPropertyValueOrNull<string>(nameof(ProcessorType));
-            set => this.SetOrAddProperty(nameof(ProcessorType), value);
+            get => this.GetPropertyValueOrNull<Type>(GetProcessorProperties.ProcessorType);
+            set => this.SetOrAddProperty(GetProcessorProperties.ProcessorType, value);
         }
-
     }
 }
