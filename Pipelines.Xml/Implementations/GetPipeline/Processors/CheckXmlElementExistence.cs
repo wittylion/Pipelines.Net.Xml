@@ -16,7 +16,7 @@ namespace Pipelines.Xml.Implementations.GetPipeline.Processors
 
             if (!xmlElement.HasElements || !xmlElement.Elements(args.ProcessorTagName).Any())
             {
-                args.AbortPipelineWithErrorAndNoResult("Xml element has no children. Can not create empty pipeline.");
+                args.AbortPipelineWithErrorAndNoResult("Xml element has no children. Cannot create pipeline.");
                 return Done;
             }
 

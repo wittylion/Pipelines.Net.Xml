@@ -13,6 +13,12 @@
     <PackageProjectUrl>https://wittylion.github.io/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/wittylion/Pipelines.Net.Xml</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>
+      Initial Release. API usage:
+
+      PipelinesXmlApi.GetPipelineFromXmlByXPath(XDocument.Load(...), "/pipelines/testPipeline", null)
+
+    </PackageReleaseNotes>
     <NeutralLanguage>English</NeutralLanguage>
     <PackageTags>Pipelines SOLID Processors Chain Xml</PackageTags>
     <Version>1.0.0</Version>
