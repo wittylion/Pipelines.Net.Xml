@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 
 namespace Pipelines.Xml.Implementations.GetProcessor.Processors
 {
-    public class TryToObtainType : SafeProcessor<GetProcessorContext>
+    public class TryToObtainType : SafeProcessor<QueryContext<IProcessor>>
     {
-        public override Task SafeExecute(GetProcessorContext args)
+        public override Task SafeExecute(QueryContext<IProcessor> args)
         {
             var type = args.GetPropertyValueOrNull<string>(GetProcessorProperties.ProcessorTypeString);
             var typeObject = Type.GetType(type);
@@ -20,7 +20,7 @@ namespace Pipelines.Xml.Implementations.GetProcessor.Processors
             return Done;
         }
 
-        public override bool SafeCondition(GetProcessorContext args)
+        public override bool SafeCondition(QueryContext<IProcessor> args)
         {
             return base.SafeCondition(args) &&
                    args.HasProperty(GetProcessorProperties.ProcessorTypeString) &&
