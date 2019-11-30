@@ -12,7 +12,7 @@ namespace Pipelines.Xml.Implementations.GetProcessor.Processors
 
             if (typeObject == null)
             {
-                args.AddWarning("Cannot obtain a type of the processor.");
+                args.AddWarning($"Cannot obtain a type of the processor [{type}].");
                 return Done;
             }
 

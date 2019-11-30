@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Xml.Linq;
 using FluentAssertions;
 using Xunit;
 
@@ -42,7 +43,25 @@ namespace Pipelines.Xml.Tests.Units
 
             pipeline.GetProcessors().Should().NotBeEmpty("because the XPath points to a pipeline containing processor");
         }
-        
+
+        [Fact]
+        public void GetPipelineFromXmlByXPath_WhenPassingStringXmlAndValidXPath_ShouldHaveProcessor()
+        {
+            var xmlPipeline = TestXmlGenerator.GetPipelineStringXmlWithSingleEmptyProcessor();
+            var pipeline = PipelinesXmlApi.GetPipelineFromXmlByXPath(XDocument.Parse(xmlPipeline), "/testPipeline", null);
+
+            pipeline.GetProcessors().Should().NotBeEmpty("because string contains valid xml with one processor");
+        }
+
+        [Fact]
+        public void GetPipelineFromXmlByXPath_WhenPassingStringXmlWithTwoProcessorsAndValidXPath_ShouldHaveTwoProcessors()
+        {
+            var xmlPipeline = TestXmlGenerator.GetPipelineStringXmlWithTwoEmptyProcessor();
+            var pipeline = PipelinesXmlApi.GetPipelineFromXmlByXPath(XDocument.Parse(xmlPipeline), "/testPipeline", null);
+
+            pipeline.GetProcessors().Should().HaveCount(2, "because there are two processors in xml");
+        }
+
         [Fact]
         public void GetPipelineFromXmlByXPath_WhenPassingNullXPath_ShouldReturnDefaultPipeline()
         {
