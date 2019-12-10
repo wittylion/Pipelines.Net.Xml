@@ -21,6 +21,11 @@ namespace Pipelines.Xml.Implementations.GetPipeline
             });
         }
 
+        public virtual IPipeline GetPipeline(GetPipelineContext context)
+        {
+            return GetPipeline((QueryContext<IPipeline>)context);
+        }
+
         public virtual IPipeline GetPipeline(QueryContext<IPipeline> context)
         {
             return Execute(context).Result;

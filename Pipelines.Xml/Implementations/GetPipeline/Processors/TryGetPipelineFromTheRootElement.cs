@@ -8,9 +8,13 @@ namespace Pipelines.Xml.Implementations.GetPipeline.Processors
 {
     public class TryGetPipelineFromTheRootElement : GetPipelineFromXmlBaseProcessor
     {
-        public override async Task SafeExecute(GetPipelineContext args)
+        public override async Task SafeExecute(QueryContext<IPipeline> args)
         {
-            var processorsElements = args.XElement.Elements(args.ProcessorTagName);
+            var pipelineRoot = args.GetPropertyValueOrNull<XElement>(GetPipelineProperties.XElement);
+            var tagName = args.GetPropertyValueOrNull<string>(GetPipelineProperties.ProcessorTagName);
+            var typeAttribute = args.GetPropertyValueOrNull<string>(GetPipelineProperties.TypeAttributeName);
+
+            var processorsElements = pipelineRoot.Elements(tagName);
             var processorParser = new ProcessorParser();
             var list = new LinkedList<IProcessor>();
 
@@ -19,12 +23,14 @@ namespace Pipelines.Xml.Implementations.GetPipeline.Processors
                 QueryContext<IProcessor> getProcessorContext = new GetProcessorContext
                 {
                     XElement = processorElement,
-                    ProcessorAttribute = args.TypeAttributeName
+                    ProcessorAttribute = typeAttribute
                 };
                 var processor = await processorParser.Execute(getProcessorContext);
 
+                args.AddMessageObjects(getProcessorContext.GetAllMessages());
+
                 if (processor == null) continue;
-                
+
                 list.AddLast(processor);
             }
 
@@ -32,11 +38,13 @@ namespace Pipelines.Xml.Implementations.GetPipeline.Processors
             args.SetResultWithInformation(result, "Pipeline is created.");
         }
 
-        protected override bool CustomSafeCondition(GetPipelineContext args)
+        protected override bool CustomSafeCondition(QueryContext<IPipeline> args)
         {
-            return args.XElement != null && 
-                   !string.IsNullOrWhiteSpace(args.ProcessorTagName) &&
-                   !string.IsNullOrWhiteSpace(args.TypeAttributeName);
+            var pipelineRoot = args.GetPropertyValueOrNull<XElement>(GetPipelineProperties.XElement);
+            var tagName = args.GetPropertyValueOrNull<string>(GetPipelineProperties.ProcessorTagName);
+            var typeAttribute = args.GetPropertyValueOrNull<string>(GetPipelineProperties.TypeAttributeName);
+
+            return pipelineRoot != null && !string.IsNullOrWhiteSpace(tagName) && !string.IsNullOrWhiteSpace(typeAttribute);
         }
     }
 }
