@@ -5,5 +5,6 @@
         public static readonly string TypeAttributeName = nameof(TypeAttributeName);
         public static readonly string ProcessorTagName = nameof(ProcessorTagName);
         public static readonly string XElement = nameof(XElement);
+        public static readonly string Processors = nameof(Processors);
     }
 }

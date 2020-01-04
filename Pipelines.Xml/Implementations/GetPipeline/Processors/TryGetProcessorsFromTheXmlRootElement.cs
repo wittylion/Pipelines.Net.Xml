@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Pipelines.Implementations.Pipelines;
 using Pipelines.Xml.Implementations.GetProcessor;
 
 namespace Pipelines.Xml.Implementations.GetPipeline.Processors
 {
-    public class TryGetPipelineFromTheRootElement : GetPipelineFromXmlBaseProcessor
+    public class TryGetProcessorsFromTheXmlRootElement : GetPipelineFromXmlBaseProcessor
     {
         public override async Task SafeExecute(QueryContext<IPipeline> args)
         {
@@ -34,8 +34,13 @@ namespace Pipelines.Xml.Implementations.GetPipeline.Processors
                 list.AddLast(processor);
             }
 
-            var result = PredefinedPipeline.FromProcessors(list);
-            args.SetResultWithInformation(result, "Pipeline is created.");
+            var processors = args.GetPropertyValueOrDefault(
+                    GetPipelineProperties.Processors,
+                    Enumerable.Empty<IProcessor>()
+                ).ToList();
+
+            processors.AddRange(list);
+            args.SetOrAddProperty(GetPipelineProperties.Processors, processors);
         }
 
         protected override bool CustomSafeCondition(QueryContext<IPipeline> args)
