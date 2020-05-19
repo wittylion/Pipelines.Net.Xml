@@ -5,7 +5,7 @@ script:
   - msbuild /t:Restore
   - msbuild /t:Build /p:Configuration=Release
   - dotnet test ./Pipelines.Xml.Tests.Units/ --configuration Release --no-build
-  - msbuild ./Pipelines.Xml/Pipelines.Xml.csproj /t:pack /p:IncludeSymbols=true /p:SymbolPackageFormat=snupkg
+  - msbuild ./Pipelines.Xml/Pipelines.Xml.csproj /t:pack /p:IncludeSymbols=true /p:SymbolPackageFormat=snupkg /p:Configuration=Release
 deploy:
   skip_cleanup: true
   provider: script
