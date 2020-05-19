@@ -1,5 +1,4 @@
-﻿using System;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using System.Xml.XPath;
 using Pipelines.Implementations.Pipelines;
 using Pipelines.Xml.Implementations.GetPipeline;
@@ -29,7 +28,17 @@ namespace Pipelines.Xml
         {
             return GetPipelineFromXml(xmlDocument?.Root, defaultValue);
         }
-        
+
+        public static IPipeline GetPipelineFromXmlByXPathOrEmpty(XNode xmlNode, string xpathExpression)
+        {
+            return GetPipelineFromXmlByXPath(xmlNode, xpathExpression, PredefinedPipeline.Empty);
+        }
+
+        public static IPipeline GetPipelineFromXmlByXPathOrNull(XNode xmlNode, string xpathExpression)
+        {
+            return GetPipelineFromXmlByXPath(xmlNode, xpathExpression, null);
+        }
+
         public static IPipeline GetPipelineFromXmlByXPath(XNode xmlNode, string xpathExpression, IPipeline defaultValue)
         {
             XElement xmlElement;

@@ -7,7 +7,11 @@ namespace Pipelines.Xml.Implementations.GetPipeline
     public class PipelineParser : PipelineExecutor
     {
         public PipelineParser() : base(
-            PredefinedPipeline.FromProcessors<CheckXmlElementExistence, TryGetPipelineFromTheRootElement>())
+            PredefinedPipeline.FromProcessors<
+                    CheckXmlElementExistence,
+                    TryGetProcessorsFromTheXmlRootElement,
+                    CreatePipeline
+                >())
         {
         }
 
@@ -19,6 +23,11 @@ namespace Pipelines.Xml.Implementations.GetPipeline
                 ProcessorTagName = "processor",
                 TypeAttributeName = "type"
             });
+        }
+
+        public virtual IPipeline GetPipeline(GetPipelineContext context)
+        {
+            return GetPipeline((QueryContext<IPipeline>)context);
         }
 
         public virtual IPipeline GetPipeline(QueryContext<IPipeline> context)

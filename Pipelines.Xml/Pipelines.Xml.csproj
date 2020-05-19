@@ -8,20 +8,43 @@
     <Authors>Sergey Solomentsev</Authors>
     <Company>Witty Lion</Company>
     <Description>Library that exposes SOLID principles by introducing pipelines.</Description>
-    <Copyright>Witty Lion © 2019</Copyright>
-    <PackageLicenseUrl>https://github.com/wittylion/Pipelines.Net.Xml/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <Copyright>Witty Lion © 2020</Copyright>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://wittylion.github.io/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/wittylion/Pipelines.Net.Xml</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <PackageReleaseNotes>
+      New in this version:
+
+      1) Added Source Link to GitHub for better debugging experience.
+      2) Updated version of Pipelines.Net used.
+      3) Updated messages and refactored some code pieces for better extension possibility.
+      4) Added methods GetPipelineFromXmlByXPathOrEmpty and GetPipelineFromXmlByXPathOrNull to PipelinesXmlApi.
+      5) Added possibility of specifying string parameters for processor constructor.
+
+      More information on using Pipelines.Net.Xml library you can find here: https://wittylion.github.io/2019/11/22/pipelines-net-xml.html
+      Also check out Pipelines.Net library: https://www.nuget.org/packages/Pipelines.Net/
+
+      Please take the survey:
+      https://forms.gle/Y8aogzwPQ3sLKXMCA
+      This inspires and helps wittylion get better.
+
+    </PackageReleaseNotes>
     <NeutralLanguage>English</NeutralLanguage>
     <PackageTags>Pipelines SOLID Processors Chain Xml</PackageTags>
-    <Version>1.0.0</Version>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <PackageIconUrl>https://wittylion.github.io/assets/pipelines-icon.png</PackageIconUrl>
+    <Version>1.0.1</Version>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <PackageIcon>pipelines-xml-icon.png</PackageIcon>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Pipelines.Net" Version="1.1.5" />
+    <PackageReference Include="Pipelines.Net" Version="1.1.7" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All"/>
+    <None Include="pipelines-xml-icon.png" Pack="true" Visible="false" PackagePath="" />
   </ItemGroup>
 
 </Project>
