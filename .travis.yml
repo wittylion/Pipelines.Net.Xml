@@ -3,13 +3,13 @@ mono: latest
 dotnet: 2.0.0
 script:
   - msbuild /t:Restore
-  - msbuild
-  - dotnet test ./Pipelines.Xml.Tests.Units/
-  - msbuild /t:pack
+  - msbuild /t:Build /p:Configuration=Release
+  - dotnet test ./Pipelines.Xml.Tests.Units/ --configuration Release --no-build
+  - msbuild ./Pipelines.Xml/Pipelines.Xml.csproj /t:pack /p:IncludeSymbols=true /p:SymbolPackageFormat=snupkg
 deploy:
   skip_cleanup: true
   provider: script
   script: 
-    - nuget push ./Pipelines.Xml/bin/Debug/Pipelines.Net.Xml.*.nupkg -Verbosity detailed -ApiKey $NugetApiKey -Source https://api.nuget.org/v3/index.json
+    - nuget push ./Pipelines.Xml/bin/Release/Pipelines.Net.Xml.*.nupkg -Verbosity detailed -ApiKey $NugetApiKey -Source https://api.nuget.org/v3/index.json
   on:
     branch: master
