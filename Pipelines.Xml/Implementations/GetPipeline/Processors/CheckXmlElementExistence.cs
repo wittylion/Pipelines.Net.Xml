@@ -1,9 +1,11 @@
-﻿using System.Linq;
+﻿using Pipelines.Implementations.Processors;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace Pipelines.Xml.Implementations.GetPipeline.Processors
 {
+    [ProcessorOrder(20)]
     public class CheckXmlElementExistence : GetPipelineFromXmlBaseProcessor
     {
         public override Task SafeExecute(QueryContext<IPipeline> args)

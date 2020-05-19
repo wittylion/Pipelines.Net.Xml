@@ -14,7 +14,7 @@ namespace Pipelines.Xml.Tests.Units.Implementations.GetProcessor.Processors
 
             var context = 
                 ContextConstructor.BuildQueryContext<IProcessor>()
-                    .Use("ProcessorTypeString", "Pipelines.Xml.Tests.Units.EmptyTestProcessor, Pipelines.Xml.Tests.Units")
+                    .Use("ProcessorTypeString", "Pipelines.Xml.Tests.Units.Data.EmptyTestProcessor, Pipelines.Xml.Tests.Units")
                     .OriginalContext;
 
             await processor.Execute(context);

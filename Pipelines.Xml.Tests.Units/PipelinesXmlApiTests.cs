@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Xml.Linq;
 using FluentAssertions;
+using Pipelines.Xml.Tests.Units.Data;
 using Xunit;
 
 namespace Pipelines.Xml.Tests.Units
@@ -69,6 +70,26 @@ namespace Pipelines.Xml.Tests.Units
             var pipeline = PipelinesXmlApi.GetPipelineFromXmlByXPath(xmlPipeline, null, null);
 
             pipeline.Should().BeNull("because the XPath is null");
+        }
+
+        [Fact]
+        public void GetPipelineFromXmlOrNull_WhenPassingStringXmlWithProcessorHavingParameter_ShouldHaveProcessorWithParameter()
+        {
+            var xmlPipeline = TestXmlGenerator.GetPipelineStringXmlWithProcessorHavingStringArgument();
+            var pipeline = PipelinesXmlApi.GetPipelineFromXmlOrNull(XDocument.Parse(xmlPipeline).Root);
+
+            pipeline.GetProcessors().Should().Contain(x => x is StringArgumentTestProcessor).Which.As<StringArgumentTestProcessor>().Parameter.Should().Be("test");
+        }
+
+        [Fact]
+        public void GetPipelineFromXmlOrNull_WhenPassingStringXmlWithTwoProcessorsHavingDifferentConstructors_ShouldHaveTwoExactProcessor()
+        {
+            var xmlPipeline = TestXmlGenerator.GetPipelineStringXmlWithTwoProcessorHavingStringArgumentAndNoArguments();
+            var pipeline = PipelinesXmlApi.GetPipelineFromXmlOrNull(XDocument.Parse(xmlPipeline).Root);
+
+            pipeline.GetProcessors().Should().AllBeAssignableTo<StringArgumentTestProcessor>();
+            pipeline.GetProcessors().First().As<StringArgumentTestProcessor>().Parameter.Should().Be("test");
+            pipeline.GetProcessors().Last().As<StringArgumentTestProcessor>().Parameter.Should().Be("default");
         }
     }
 }

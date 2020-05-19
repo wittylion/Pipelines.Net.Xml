@@ -20,6 +20,7 @@
       2) Updated version of Pipelines.Net used.
       3) Updated messages and refactored some code pieces for better extension possibility.
       4) Added methods GetPipelineFromXmlByXPathOrEmpty and GetPipelineFromXmlByXPathOrNull to PipelinesXmlApi.
+      5) Added possibility of specifying string parameters for processor constructor.
 
       More information on using Pipelines.Net.Xml library you can find here: https://wittylion.github.io/2019/11/22/pipelines-net-xml.html
       Also check out Pipelines.Net library: https://www.nuget.org/packages/Pipelines.Net/

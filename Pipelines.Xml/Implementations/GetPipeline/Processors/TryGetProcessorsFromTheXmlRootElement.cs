@@ -2,12 +2,16 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Pipelines.Implementations.Processors;
 using Pipelines.Xml.Implementations.GetProcessor;
 
 namespace Pipelines.Xml.Implementations.GetPipeline.Processors
 {
+    [ProcessorOrder(60)]
     public class TryGetProcessorsFromTheXmlRootElement : GetPipelineFromXmlBaseProcessor
     {
+        protected ProcessorParser ProcessorParser { get; } = new ProcessorParser();
+
         public override async Task SafeExecute(QueryContext<IPipeline> args)
         {
             var pipelineRoot = args.GetPropertyValueOrNull<XElement>(GetPipelineProperties.XElement);
@@ -15,7 +19,7 @@ namespace Pipelines.Xml.Implementations.GetPipeline.Processors
             var typeAttribute = args.GetPropertyValueOrNull<string>(GetPipelineProperties.TypeAttributeName);
 
             var processorsElements = pipelineRoot.Elements(tagName);
-            var processorParser = new ProcessorParser();
+            var processorParser = GetProcessorParser();
             var list = new LinkedList<IProcessor>();
 
             foreach (var processorElement in processorsElements)
@@ -41,6 +45,11 @@ namespace Pipelines.Xml.Implementations.GetPipeline.Processors
 
             processors.AddRange(list);
             args.SetOrAddProperty(GetPipelineProperties.Processors, processors);
+        }
+
+        public virtual PipelineExecutor GetProcessorParser()
+        {
+            return ProcessorParser;
         }
 
         protected override bool CustomSafeCondition(QueryContext<IPipeline> args)

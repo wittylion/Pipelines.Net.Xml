@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace Pipelines.Xml.Implementations.GetPipeline.Processors
 {
+    [ProcessorOrder(100)]
     public class CreatePipeline : ExecuteActionForPropertyProcessorConcept<QueryContext<IPipeline>, List<IProcessor>>
     {
         public override string GetPropertyName(QueryContext<IPipeline> args)

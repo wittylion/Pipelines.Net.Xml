@@ -1,5 +1,4 @@
-﻿using System;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 using System.Xml.XPath;
 using Pipelines.Implementations.Pipelines;
 using Pipelines.Xml.Implementations.GetPipeline;

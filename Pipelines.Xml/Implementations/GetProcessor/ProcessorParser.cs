@@ -1,16 +1,12 @@
 ﻿using System.Xml.Linq;
+using Pipelines.ExtensionMethods;
 using Pipelines.Implementations.Pipelines;
-using Pipelines.Xml.Implementations.GetProcessor.Processors;
 
 namespace Pipelines.Xml.Implementations.GetProcessor
 {
     public class ProcessorParser : PipelineExecutor
     {
-        public ProcessorParser() : base(
-            PredefinedPipeline.FromProcessors<
-                ParseProcessorType, 
-                TryToObtainType, 
-                CreateTypeDerivedFromProcessorInterface>())
+        public ProcessorParser() : base(new NamespaceBasedPipeline("Pipelines.Xml.Implementations.GetProcessor.Processors").CacheInMemory())
         {
         }
 
