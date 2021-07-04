@@ -1,17 +1,13 @@
 ﻿using System.Xml.Linq;
+using Pipelines.ExtensionMethods;
 using Pipelines.Implementations.Pipelines;
-using Pipelines.Xml.Implementations.GetPipeline.Processors;
 
 namespace Pipelines.Xml.Implementations.GetPipeline
 {
     public class PipelineParser : PipelineExecutor
     {
         public PipelineParser() : base(
-            PredefinedPipeline.FromProcessors<
-                    CheckXmlElementExistence,
-                    TryGetProcessorsFromTheXmlRootElement,
-                    CreatePipeline
-                >())
+            new NamespaceBasedPipeline("Pipelines.Xml.Implementations.GetPipeline.Processors").CacheInMemory())
         {
         }
 

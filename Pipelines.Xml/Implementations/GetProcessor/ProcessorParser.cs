@@ -6,7 +6,8 @@ namespace Pipelines.Xml.Implementations.GetProcessor
 {
     public class ProcessorParser : PipelineExecutor
     {
-        public ProcessorParser() : base(new NamespaceBasedPipeline("Pipelines.Xml.Implementations.GetProcessor.Processors").CacheInMemory())
+        public ProcessorParser() : base(
+            new NamespaceBasedPipeline("Pipelines.Xml.Implementations.GetProcessor.Processors").CacheInMemory())
         {
         }
 
