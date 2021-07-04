@@ -1,23 +1,17 @@
 ﻿using Pipelines.Implementations.Pipelines;
 using Pipelines.Implementations.Processors;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Pipelines.Xml.Implementations.GetPipeline.Processors
 {
     [ProcessorOrder(100)]
-    public class CreatePipeline : ExecuteActionForPropertyProcessorConcept<QueryContext<IPipeline>, List<IProcessor>>
+    public class CreatePipeline : ExplanatoryProcessor
     {
-        public override string GetPropertyName(QueryContext<IPipeline> args)
+        [ExecuteMethod]
+        public void PropertyExecution(QueryContext<IPipeline> args, List<IProcessor> processors)
         {
-            return GetPipelineProperties.Processors;
-        }
-
-        public override Task PropertyExecution(QueryContext<IPipeline> args, List<IProcessor> property)
-        {
-            var result = PredefinedPipeline.FromProcessors(property);
+            var result = PredefinedPipeline.FromProcessors(processors);
             args.SetResultWithInformation(result, "Pipeline is created.");
-            return Done;
         }
     }
 }

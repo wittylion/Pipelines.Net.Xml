@@ -17,4 +17,10 @@
     <ProjectReference Include="..\Pipelines.Xml\Pipelines.Xml.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Pipelines">
+      <HintPath>..\..\Pipelines.Net\Pipelines\bin\Debug\netstandard2.0\Pipelines.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

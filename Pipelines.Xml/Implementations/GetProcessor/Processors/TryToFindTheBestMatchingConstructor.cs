@@ -7,6 +7,26 @@ using System.Threading.Tasks;
 
 namespace Pipelines.Xml.Implementations.GetProcessor.Processors
 {
+    public class CollectInformationOfConstructors : SafeProcessor<QueryContext<IProcessor>>
+    {
+        public override Task SafeExecute(QueryContext<IProcessor> args)
+        {
+            var typeObject = args.GetPropertyValueOrNull<Type>(GetProcessorProperties.ProcessorType);
+            
+            var constructors = typeObject.GetConstructors();
+
+            foreach (var constructor in constructors.OrderByDescending(x => x.GetParameters().Length))
+            {
+                var parameters = constructor.GetParameters();
+
+                args.AddOrSkipPropertyIfExists(GetProcessorProperties.Constructor, constructor);
+                break;
+            }
+
+            return Done;
+        }
+    }
+
     [ProcessorOrder(105)]
     public class TryToFindTheBestMatchingConstructor : SafeProcessor<QueryContext<IProcessor>>
     {
